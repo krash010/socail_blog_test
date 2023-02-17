@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Зарегистрироваться{% endblock %}
+{% block content %}
+{# загружаем фильтр #}
+{% load user_filters %}
+
+<main role="main" class="container">
+    <div class="row">
+            <div class="col-md-3 mb-3 mt-1">
+                <div class="card">
+                        <div class="card-body">
+                                <div class="h2">
+                                    <!-- Имя автора -->
+                                    {{ pview.first_name }} {{ pview.last_name }}
+                                </div>
+                                <div class="h3 text-muted">
+                                     <!-- username автора -->
+                                     {{ pview.username }}
+                                </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                        <div class="h6 text-muted">
+                                        Подписчиков: XXX <br />
+                                        Подписан: XXX
+                                        </div>
+                                </li>
+                                <li class="list-group-item">
+                                        <div class="h6 text-muted">
+                                            <!--Количество записей -->
+                                            Количество постов: {{ pview_all }}
+                                        </div>
+                                </li>
+                        </ul>
+                </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <!-- Пост -->  
+                {% include "post_item.html" with post=pview_get %}
+                
+                {% include "comments.html" with post_id=pview_get.id %}
+     </div>
+    </div>
+</main>
+
+{% endblock %}
